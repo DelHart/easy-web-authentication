@@ -1,0 +1,12 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="REFRESH" content="0; url=http://[%-host-%]:[%-port-%]/[%-dest-%]">
+</head>
+
+<body>
+If you are impatient follow this <a href="http://[%-host-%]:[%-port-%]/[%-dest-%]">link</a>
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+This is a simple web application to provide single sign-on for student
+(or other) web applications.  This application sets a cookie with the
+user-id and a time stamp in the CSAUTH cookie.  The CSSIG cookie contains
+a digital signature of the user-id, timestamp for verification purposes.
+
+If this application is going to handle sensitive information then it
+should be run over the https protocol.  If the data is not sensitive
+then http is fine.
+
+
+Set up
+1. create private/public key pair
+2. set environment variables
+3. run the server
+4. incorporate the verification code into the client programs
+
+0. Install software
+----------------------
+----------------------
+This web application uses the Catalyst perl framework and a number of Perl
+modules publicly available via CPAN.
+
+To use in a production environment, you will also need Apache with the
+fastcgi module.
+
+Crypt::DSA - used for generating the key pair
+
+
+1. Create private/public key pair
+----------------------
+----------------------
+After getting the source the first step is to create a private/public key pair
+for the authentication server.
+
+In the lib directory, there is a script that will create the necessary files
+
+
+2. Set Environment variables
+----------------------
+----------------------
+export LDAPPASS=password
+export LDAPUSER=username
+export LDAPSERV=ip.ad.dre.ss
+export LDAPBASE="ldap string of the base dn"
+export PRIVKEY="path to the private key file"
+
+
+3a. Running under https
+----------------------
+----------------------
+
+One way to run it under https is to use the fastcgi script through an Apache
+Virtual host.
+
+The virtual host config file would look something like
+-------------- Begin example apache conf.d file -------------
+
+<VirtualHost _default_:5555>
+SSLEngine On
+SSLCertificateFile /etc/ssl/certs/server.crt
+SSLCertificateKeyFile /etc/ssl/private/server.key
+
+FastCgiServer /home/del/webapps/auth/script/auth_fastcgi.pl -processes 2
+Alias / /home/del/webapps/auth/script/auth_fastcgi.pl/
+</VirtualHost>
+
+-------------- End example apache conf.d file -------------
+
+The above file will set up apache to listen on port 5555 for the https
+protocol.  You will need to create your own ssl certificates and point
+to them using the SSLCertificate variables.
+
+The last two lines define where the web application code is and how
+many processes should be run.  
+
+
+3b. Running under http
+----------------------
+----------------------
+
+For testing and development purposes, you can just run 
+script/auth_server.pl 
+
+There are a number of options.  The -p will let you choose the port 
+number, and -r flag will automatically restart the web application
+after you make changes to the code.
+
+
+4. Incorporate verification
+----------------------
+----------------------
+Usually left as an exercise for the student

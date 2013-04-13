@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="title" content="Computer Science Authentication" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" type="text/css" media="screen" href="[%c.uri_for ('/static/style.css')%]" />
+	<title>Computer Science Authentication</title>
+</head>
+<body>
+
+    <form name="loginform" id="loginform" action="[% Catalyst.uri_for('/login') %]" method="post">
+      <strong><label for="username">Username</label></strong>
+	    <input type="text" name="username" id="username" />  <br />
+      <strong><label for="password">Password</label></strong>
+
+      <input type="password" name="password" id="password" />  <br />
+
+      <input id="save" class="loginbutton" type="submit" class="submit" value="Log In" />
+    </form>
+
+<p/>
+[% error_msg %]
+
+</body>
+</html>
